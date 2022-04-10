@@ -9,6 +9,7 @@ class Send extends React.Component
 		};
 		var elements = document.getElementsByClassName("name");
 		console.log(elements);
+                console.log(docData);
 	}
 	render()
 	{
