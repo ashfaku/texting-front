@@ -46,6 +46,7 @@ body
 	max-width: 10%;
 	position: relative;
 	left: 45%;
+        background-color: red;
 	animation: rot 1s linear infinite;
 	-webkit-animation-fill-mode: forwards;
 	-moz-animation-fill-mode: forwards; 
