@@ -5,7 +5,7 @@ class Send extends React.Component
 	{
 		const docData = 
 		{
-			stringExample: document.getElementById("input").text,
+			stringExample: document.getElementById("input").value,
 		};
 		var elements = document.getElementsByClassName("name");
 		console.log(elements);
