@@ -1,0 +1,21 @@
+#panel
+{
+	position: absolute;
+	right: 0%;
+	top: 0em;
+	width: 5em;
+	height: 100%;
+	background-color: red;
+	text-align: center;
+}
+.fa
+{
+	padding-top: 10px;
+	font-size: 3em; 
+	border-radius: 50%;
+}
+.fa:hover
+{
+	font-size: 5em;
+	cursor: pointer;
+}
