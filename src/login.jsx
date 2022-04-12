@@ -1,6 +1,9 @@
 import React from 'react';
-//import './login.css';
+import './login.css';
+import * as ReactDOMClient from 'react-dom/client';
+
 import logo from './logo1.svg';
+import Creation from './creation.jsx';
 class Login extends React.Component
 {
 	login()
@@ -12,15 +15,16 @@ class Login extends React.Component
 			"username" : u.value,
 			"password" : p.value
 		};
-		console.log(info);
+		return info;
 	}
-	create()
+	handleSubmit = (event) => 
 	{
+		this.props.value.render(<Creation />);
 	}
 	render()
 	{
-		return <div>
-		        <img src={logo} className="App-logo" alt="logo" />
+		return <div className = "loginBg">
+		        <img src={logo} className = "App-logo" alt = "logo" />
 				<div id = "title">Nuclei</div>
 				<div id = "login"> 
 					<input type = "text" id = "u" placeholder = "Username..."></input>
@@ -28,9 +32,8 @@ class Login extends React.Component
 				</div>
 				<button id = "loginButton" onClick = {this.login}>Login</button>
 				<div id = "line">or</div>
-				<button id = "createAccount" onClick = {this.create}>Create New Account</button>
-		
-		</div>
+				<button id = "createAccount" onClick = {this.handleSubmit}>Create New Account</button>
+			</div>
 	}
 }
 
