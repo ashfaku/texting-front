@@ -1,6 +1,8 @@
 import React from 'react';
-import './panel.css';
+import Login from './login.jsx';
+import * as ReactDOMClient from 'react-dom/client';
 import SettingPanel from './settingpanel.jsx';
+import './panel.css';
 class Panel extends React.Component
 {
 	constructor(props)
@@ -20,7 +22,8 @@ class Panel extends React.Component
 	}
 	signOut()
 	{
-		
+		const root = ReactDOMClient.createRoot(document.getElementById('root'));
+	//	root.render(<Login />);
 	}
 	render()
 	{

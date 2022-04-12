@@ -1,16 +1,13 @@
 import React from 'react';
 import './friends.css';
-import logo from './logo1.svg';
+import Person from './person.jsx';
 class FriendList extends React.Component
 {
 	render()
 	{
+		var names = ['Zhipeng', 'Tiffanie', 'Victor', 'Peng', 'Your Mother'];
 		return (<div id = "friendList">
-			<div className = "person"><img src={logo} className="App-logo" alt="logo" /><p className = "fName">Zhipeng</p></div>
-			<div className = "person"><img src={logo} className="App-logo" alt="logo" /><p className = "fName">Tiffanie</p></div>
-			<div className = "person"><img src={logo} className="App-logo" alt="logo" /><p className = "fName">Victor</p></div>
-			<div className = "person"><img src={logo} className="App-logo" alt="logo" /><p className = "fName">Peng</p></div>
-			<div className = "person"><img src={logo} className="App-logo" alt="logo" /><p className = "fName">Your Mom</p></div>
+			{names.map((e) => <Person name = {e} />)}
 		</div>)
 	}
 }
