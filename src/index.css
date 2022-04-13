@@ -6,8 +6,7 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-code {
+}code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
@@ -22,8 +21,11 @@ code {
 .list
 { 
 	position: absolute;
-	right: 5em;
-	width: 60em;
+	left: 22.5%;
+	height: 90%;
+	overflow-x: hidden;
+    overflow-y: auto;
+	width: 72.5%;
 	border: 1px solid #73AD21;
 }
 .red
@@ -61,15 +63,12 @@ code {
 {
 	font-family: "Roboto", sans-serif;
 	background-color: grey;
-	max-width: 50em;
+	overflow-wrap: break-word;
+	width: 100%;
 }
 .message:hover
 {
 	background-color: #353839;
-}
-body
-{
-	background-color: grey;
 }
 .text
 {

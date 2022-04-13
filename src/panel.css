@@ -3,18 +3,18 @@
 	position: absolute;
 	right: 0%;
 	top: 0em;
-	width: 5em;
+	width: 5%;
 	height: 100%;
 	background-color: red;
 	text-align: center;
 }
-.fa
+.fa-gear, .fa-sign-out
 {
 	padding-top: 10px;
 	font-size: 3em; 
 	border-radius: 50%;
 }
-.fa:hover
+.fa-gear:hover, .fa-sign-out:hover
 {
 	font-size: 5em;
 	cursor: pointer;

@@ -7,7 +7,7 @@ class Person extends React.Component
 	render()
 	{
 		return (<div> 
-			<div className = "person"><img src={logo} className = "App-logo" alt = "logo" /><p className = "fName">{this.props.name}</p></div>
+			<div className = "person"><img src={logo} className = "pfp" alt = "logo" /><p className = "fName">{this.props.name}</p></div>
 		</div>)
 	}
 }

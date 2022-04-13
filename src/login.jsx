@@ -19,7 +19,7 @@ class Login extends React.Component
 	}
 	handleSubmit = (event) => 
 	{
-		this.props.value.render(<Creation />);
+		this.props.value.render(<Creation root = {this.props.value} />);
 	}
 	render()
 	{
@@ -32,7 +32,7 @@ class Login extends React.Component
 				</div>
 				<button id = "loginButton" onClick = {this.login}>Login</button>
 				<div id = "line">or</div>
-				<button id = "createAccount" onClick = {this.handleSubmit}>Create New Account</button>
+				<button id = "createAccount"onClick = {this.handleSubmit}>Create New Account</button>
 			</div>
 	}
 }

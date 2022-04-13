@@ -1,11 +1,12 @@
 import React from 'react';
+import './send.css';
 class Send extends React.Component
 {
 	async send()
 	{
 		const docData = 
 		{
-			stringExample: document.getElementById("input").value,
+			stringExample: document.getElementById("sendMsg").value,
 		};
 		var elements = document.getElementsByClassName("name");
 		console.log(elements);
@@ -13,9 +14,9 @@ class Send extends React.Component
 	}
 	render()
 	{
-		return <div>
-		<input type = "text" id = "input"></input>
-		<button id = "send" onClick={this.send}>Send</button>
+		return <div id = "sendDiv">
+			<input type = "text" id = "sendMsg"></input>
+			<button id = "send" onClick={this.send}><i className = "fa fa-paper-plane"></i></button>
 		</div>
 	}
 

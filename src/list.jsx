@@ -12,9 +12,9 @@ class List extends React.Component
 	}
 	async componentDidMount() 
 	{
-		let b = await this.callBackendAPI();//.then(res => 
-		console.log(b);
-		this.setState({ names: b.names });//.catch(err => console.log(err));
+//		let b = await this.callBackendAPI();//.then(res => 
+		//console.log(b);
+		this.setState({ names: ['Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky' ] });//.catch(err => console.log(err));
 	}
     // fetching the GET route from the Express server which matches the GET route from server.js
 	callBackendAPI = async () => 
@@ -33,10 +33,14 @@ class List extends React.Component
 	render() 
 	{
 		let i = 0;	
-		return (<div className = "list">
-			<Setup />{this.state.names.map((e) => <Message name = {e.name} text = {e.msg} color = {e.color} key = {i++} />)}
-			<Send />
-		</div>);
+		return ( 
+				<div>
+				<div className = "list">
+					<Setup />{this.state.names.map((e) => <Message name = {e} text = "idkrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrk" color = "red" key = {i++} />)}
+				</div>
+				<Send />
+		
+			</div>)
 	}
 }
 

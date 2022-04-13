@@ -22,8 +22,6 @@ class Panel extends React.Component
 	}
 	signOut()
 	{
-		const root = ReactDOMClient.createRoot(document.getElementById('root'));
-	//	root.render(<Login />);
 	}
 	render()
 	{
@@ -33,7 +31,7 @@ class Panel extends React.Component
 			{
 				this.state.settingsVisible ? <SettingPanel /> : <span></span>
             }
-
+	//		<span>{this.props.name}</span>
 		</div>
 	}
 }

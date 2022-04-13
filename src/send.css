@@ -1,0 +1,39 @@
+#sendDiv
+{
+	padding: 2%;
+	position: absolute;
+	bottom: 0%;
+	left: 21%;
+	height: 0%;
+	width: 69%;
+}
+#sendMsg
+{
+	width: 85%;
+	height: 50%;
+	position: absolute;
+	bottom: 20%;
+	font-size: 24px;
+	border-radius: 25px;
+}
+#send
+{
+	position: absolute;
+	left: 90%;
+	bottom: 5%;
+	width: 7.5%;
+	height: 90%;
+	border-radius: 50%;
+	background-color: blue;
+	border: 1px blue;
+}
+.fa-paper-plane
+{
+	transform: rotate3d(1, 0, 0, 60deg);
+	transform: rotate3d(0, 0, 1, 50deg);
+	font-size: 2em;
+}
+.fa-paper-plane:hover
+{
+	cursor: pointer;
+}

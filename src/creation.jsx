@@ -1,5 +1,6 @@
 import React from 'react';
 import './login.css';
+import Layout from './layout.jsx';
 
 import logo from './logo1.svg';
 class Creation extends React.Component
@@ -30,11 +31,12 @@ class Creation extends React.Component
 	};
 	handleSubmit = async (event) =>
 	{
+		let info = this.getInfo();
 	    fetch('http://localhost:5000/express_backend', 
 		{
 			method: 'POST',
 			// We convert the React state to JSON and send it as the POST body
-			body: JSON.stringify(this.getInfo()),
+			body: JSON.stringify(info),
 			headers: 
 			{
 				'Accept': 'application/json',
@@ -43,6 +45,7 @@ class Creation extends React.Component
 		})
 		let res = await this.callBackendAPI();
 		console.log(res); 
+		//this.props.root.render(<Layout name = {info.username} />);
 		event.preventDefault();
 	}
 	render()

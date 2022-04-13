@@ -70,7 +70,7 @@
 		transform: rotateY(360deg);
 	}
 }
-button
+#loginButton, #createAccount
 {
 	position: relative;
 	left: 40%;
@@ -88,7 +88,7 @@ button
 {
 	top: 6em;
 }
-input
+#u, #p, #uN, #pN, #e
 {
 	float: left;
 	clear: left;
