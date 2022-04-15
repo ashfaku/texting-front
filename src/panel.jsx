@@ -31,7 +31,6 @@ class Panel extends React.Component
 			{
 				this.state.settingsVisible ? <SettingPanel /> : <span></span>
             }
-	//		<span>{this.props.name}</span>
 		</div>
 	}
 }

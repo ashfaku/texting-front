@@ -6,8 +6,8 @@ class Message extends React.Component
 		console.log(this.props.color);
 		return <div className = "message">
 			<div className = "header">
-				<span className = "name">Tofu</span>		
-				<span className = "date">idk</span>
+				<span className = {`name ${this.props.color}`}>{this.props.name}</span>		
+				<span className = "date">{this.props.color}</span>
 			</div>
 			<div className = "text">{this.props.text}</div>
 		</div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import './login.css';
 import Layout from './layout.jsx';
-
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import logo from './logo1.svg';
+
+const client = new W3CWebSocket('ws://localhost:5000');
 class Creation extends React.Component
 {
 	getInfo()
-	{
-		
+	{		
 		var u = document.getElementById('uN');
 		var p = document.getElementById('pN');
 		var e = document.getElementById('e');
@@ -18,6 +19,15 @@ class Creation extends React.Component
 			"email" : e.value
 		};
 		return info;
+	}
+	componentDidMount()
+	{
+		client.onopen = () => {
+			console.log('WebSocket Client Connected');
+		};
+		client.onmessage = (message) => {
+			console.log(message);
+		};
 	}
 	callBackendAPI = async () => 
 	{
@@ -32,19 +42,12 @@ class Creation extends React.Component
 	handleSubmit = async (event) =>
 	{
 		let info = this.getInfo();
-	    fetch('http://localhost:5000/express_backend', 
-		{
-			method: 'POST',
-			// We convert the React state to JSON and send it as the POST body
-			body: JSON.stringify(info),
-			headers: 
-			{
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-		let res = await this.callBackendAPI();
-		console.log(res); 
+		client.send(JSON.stringify({
+			"username" : info.username,
+			"password" : info.password,
+			"email" : info.email,
+			type: "userevent"
+		}));
 		//this.props.root.render(<Layout name = {info.username} />);
 		event.preventDefault();
 	}
