@@ -7,6 +7,14 @@ import logo from './logo1.svg';
 const client = new W3CWebSocket('ws://localhost:5000');
 class Creation extends React.Component
 {
+	constructor(props)
+	{
+		super(props);
+		this.state = 
+		{
+			"accountStatus" : false
+		};
+	}
 	getInfo()
 	{		
 		var u = document.getElementById('uN');
@@ -23,10 +31,18 @@ class Creation extends React.Component
 	componentDidMount()
 	{
 		client.onopen = () => {
-			console.log('WebSocket Client Connected');
+	//		console.log('WebSocket Client Connected');
 		};
 		client.onmessage = (message) => {
-			console.log(message);
+			var v = JSON.parse(message.data);
+		//	console.log(v.account);
+			this.setState({ "accountStatus" : (v.status == "Not allowed")});
+		//	console.log(this.state);
+			if (this.state.accountStatus)
+			{
+				client.close();
+				this.props.root.render(<Layout user = {v.account} />);
+			}
 		};
 	}
 	callBackendAPI = async () => 
@@ -46,7 +62,7 @@ class Creation extends React.Component
 			"username" : info.username,
 			"password" : info.password,
 			"email" : info.email,
-			type: "userevent"
+			type: "create"
 		}));
 		//this.props.root.render(<Layout name = {info.username} />);
 		event.preventDefault();
@@ -61,6 +77,8 @@ class Creation extends React.Component
 					<input type = "text" id = "uN" placeholder = "Username..."></input>
 					<input type = "text" id = "pN" placeholder = "Password..."></input>
 				</div>
+				{this.state.accountStatus ? <div id = "accountStatus">Username is already taken</div> : <div></div>}
+
 				<button id = "createAccount" onClick = {this.handleSubmit}>Create</button>
 			</div>
 	}

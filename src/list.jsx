@@ -2,19 +2,34 @@ import React from 'react';
 import Message from './message.jsx';
 import Setup from './setup.jsx';
 import './index.css';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Send from './send.jsx';
+
+const client = new W3CWebSocket('ws://localhost:5000');
+
 class List extends React.Component 
 {
 	constructor(props) 
 	{
 		super(props);
-		this.state = { names: [], texts : [] };
+		this.state = {list : []};
 	}
 	async componentDidMount() 
 	{
-//		let b = await this.callBackendAPI();//.then(res => 
-		//console.log(b);
-		this.setState({ names: ['Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky', 'Tofu', 'Vicky' ] });//.catch(err => console.log(err));
+		client.onopen = () => {
+			console.log('WebSocket Client Connected');
+		};
+		client.send(JSON.stringify({
+			"type" : "texting",
+			"name" : "ripple"
+		}));
+		client.onmessage  = (message) =>
+		{
+			console.log(message);
+		//		this.setState({list: JSON.parse(message)});
+	
+		};
+		this.setState({});
 	}
     // fetching the GET route from the Express server which matches the GET route from server.js
 	callBackendAPI = async () => 
@@ -36,9 +51,9 @@ class List extends React.Component
 		return ( 
 				<div>
 				<div className = "list">
-					<Setup />{this.state.names.map((e) => <Message name = {e} text = "idkrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrk" color = "red" key = {i++} />)}
+					<Setup />{this.state.list.map((e) => <Message info = {e} key = {i++} />)}
 				</div>
-				<Send />
+				<Send client = {client} />
 		
 			</div>)
 	}

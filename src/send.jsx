@@ -6,11 +6,10 @@ class Send extends React.Component
 	{
 		const docData = 
 		{
+			type: "sendData",
 			stringExample: document.getElementById("sendMsg").value,
-		};
-		var elements = document.getElementsByClassName("name");
-		console.log(elements);
-                console.log(docData);
+		}
+		this.props.client.send(JSON.stringify(docData));
 	}
 	render()
 	{
