@@ -24,7 +24,7 @@ class List extends React.Component
 			"type" : "texting",
 			"name" : "ripple"
 		}));
-		client.onmessage  = (message) =>
+		client.onmessage = (message) =>
 		{
 			this.setState({list: JSON.parse(message.data)});
 			console.log(this.state);
