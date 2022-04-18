@@ -1,6 +1,6 @@
 import React from 'react';
 //import Login from './login.jsx';
-import * as ReactDOMClient from 'react-dom/client';
+//import * as ReactDOMClient from 'react-dom/client';
 import SettingPanel from './settingpanel.jsx';
 import './panel.css';
 class Panel extends React.Component
