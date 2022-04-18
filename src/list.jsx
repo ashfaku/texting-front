@@ -16,6 +16,7 @@ class List extends React.Component
 	}
 	async componentDidMount() 
 	{
+		console.log(this.props.username);
 		client.onopen = () => {
 			console.log('WebSocket Client Connected');
 		};
@@ -25,15 +26,13 @@ class List extends React.Component
 		}));
 		client.onmessage  = (message) =>
 		{
-			console.log(message);
-		//		this.setState({list: JSON.parse(message)});
-	
+			this.setState({list: JSON.parse(message.data)});
+			console.log(this.state);
 		};
 		this.setState({});
 	}
     // fetching the GET route from the Express server which matches the GET route from server.js
-	callBackendAPI = async () => 
-	{
+	callBackendAPI = async () => {
 	//	const response = await fetch('http://puppygifs.tumblr.com/api/read/json/');
 		const response = await fetch('https://nuclei-texting.herokuapp.com/express_backend/');
 		const body = await response.json();
@@ -53,7 +52,7 @@ class List extends React.Component
 				<div className = "list">
 					<Setup />{this.state.list.map((e) => <Message info = {e} key = {i++} />)}
 				</div>
-				<Send client = {client} />
+				<Send client = {client} username = {this.props.username} />
 		
 			</div>)
 	}

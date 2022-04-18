@@ -3,13 +3,13 @@ class Message extends React.Component
 {
 	render()
 	{
-		console.log(this.props.color);
+		let info = this.props.info;
 		return <div className = "message">
 			<div className = "header">
-				<span className = {`name ${this.props.color}`}>{this.props.name}</span>		
-				<span className = "date">{this.props.color}</span>
+				<span className = {`name ${info.color}`}>{info.name}</span>		
+				<span className = "date">{info.date}</span>
 			</div>
-			<div className = "text">{this.props.text}</div>
+			<div className = "text">{info.msg}</div>
 		</div>
 	}
 }
