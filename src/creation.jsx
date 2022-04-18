@@ -36,7 +36,7 @@ class Creation extends React.Component
 		client.onmessage = (message) => {
 			var v = JSON.parse(message.data);
 		//	console.log(v.account);
-			this.setState({ "accountStatus" : (v.status == "Not allowed")});
+			this.setState({ "accountStatus" : (v.status === "Not allowed")});
 		//	console.log(this.state);
 			if (this.state.accountStatus)
 			{
