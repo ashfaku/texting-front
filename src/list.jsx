@@ -5,31 +5,27 @@ import './index.css';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Send from './send.jsx';
 
-const client = new W3CWebSocket('ws://app.netlify.com/sites/thunderous-bavarois-da9e5c');
-
 class List extends React.Component 
 {
 	constructor(props) 
 	{
 		super(props);
 		this.state = {list : []};
+		this.componentDidMount = this.componentDidMount.bind(this);
+
 	}
-	async componentDidMount() 
+	componentDidMount = async () =>
 	{
+		let client = this.props.client;
+		client.emit('initialList', {"request" : true });
 		console.log(this.props.username);
-		client.onopen = () => {
-			console.log('WebSocket Client Connected');
-		};
-		client.send(JSON.stringify({
-			"type" : "texting",
-			"name" : "ripple"
-		}));
-		client.onmessage = (message) =>
-		{
-			this.setState({list: JSON.parse(message.data)});
-			console.log(this.state);
-		};
-		this.setState({});
+		client.on('initialData', (message) => {
+			this.setState({list: message});
+		});
+		client.on('update', (message) => {
+			console.log(message);
+			this.setState({list: message});
+		});
 	}
     // fetching the GET route from the Express server which matches the GET route from server.js
 	callBackendAPI = async () => {
@@ -52,7 +48,7 @@ class List extends React.Component
 				<div className = "list">
 					<Setup />{this.state.list.map((e) => <Message info = {e} key = {i++} />)}
 				</div>
-				<Send client = {client} username = {this.props.username} />
+				<Send client = {this.props.client} username = {this.props.username} />
 		
 			</div>)
 	}

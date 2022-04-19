@@ -1,10 +1,9 @@
 import React from 'react';
 import './login.css';
 import Layout from './layout.jsx';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+import socketClient  from "socket.io-client";
 import logo from './logo1.svg';
-
-const client = new W3CWebSocket('ws://app.netlify.com/sites/thunderous-bavarois-da9e5c/');
+var client;
 class Creation extends React.Component
 {
 	constructor(props)
@@ -30,20 +29,33 @@ class Creation extends React.Component
 	}
 	componentDidMount()
 	{
-		client.onopen = () => {
-	//		console.log('WebSocket Client Connected');
-		};
-		client.onmessage = (message) => {
+		//const url = "http://127.0.0.1:5000";
+	    const url = "https://nuclei-message.herokuapp.com";
+		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
+		client.on('connection', (m) => {
+				console.log(m);
+		});
+		client.on('createAccount', (message) => {
+			console.log(message);
+		
+		});
+		client.on('status', (message) => {
+			console.log(message);
+			this.setState({ "accountStatus" : (message.status === "Not allowed")});
+			if (this.state.accountStatus)
+			{
+				this.props.root.render(<Layout user = {message.account} client = {client} />);
+			}
+		});
+		/*client.onmessage = (message) => {
 			var v = JSON.parse(message.data);
-		//	console.log(v.account);
 			this.setState({ "accountStatus" : (v.status === "Not allowed")});
-		//	console.log(this.state);
 			if (this.state.accountStatus)
 			{
 				client.close();
 				this.props.root.render(<Layout user = {v.account} />);
 			}
-		};
+		};*/
 	}
 	callBackendAPI = async () => 
 	{
@@ -58,13 +70,20 @@ class Creation extends React.Component
 	handleSubmit = async (event) =>
 	{
 		let info = this.getInfo();
-		client.send(JSON.stringify({
+		client.emit('createAccount', {
+			"username" : info.username,
+			"password" : info.password,
+			"email" : info.email,
+			type: "create"
+		} );
+		/*client.send(JSON.stringify({
 			"username" : info.username,
 			"password" : info.password,
 			"email" : info.email,
 			type: "create"
 		}));
 		//this.props.root.render(<Layout name = {info.username} />);
+		*/
 		event.preventDefault();
 	}
 	render()

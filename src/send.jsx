@@ -23,7 +23,7 @@ class Send extends React.Component
 			color: "red"
 		}
 		if (docData.message.length > 0)
-			this.props.client.send(JSON.stringify(docData));
+			this.props.client.emit('sendData', docData);
 		document.getElementById("sendMsg").value = "";
 	}
 	render()

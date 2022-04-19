@@ -1,7 +1,5 @@
 import React from 'react';
 import './login.css';
-//import * as ReactDOMClient from 'react-dom/client';
-
 import logo from './logo1.svg';
 import Creation from './creation.jsx';
 class Login extends React.Component
