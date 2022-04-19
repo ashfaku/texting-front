@@ -2,7 +2,6 @@ import React from 'react';
 import Message from './message.jsx';
 import Setup from './setup.jsx';
 import './index.css';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Send from './send.jsx';
 
 class List extends React.Component 
