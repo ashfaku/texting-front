@@ -5,7 +5,7 @@ import './index.css';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import Send from './send.jsx';
 
-const client = new W3CWebSocket('ws://localhost:5000');
+const client = new W3CWebSocket('ws://app.netlify.com/sites/thunderous-bavarois-da9e5c');
 
 class List extends React.Component 
 {

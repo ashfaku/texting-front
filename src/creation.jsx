@@ -4,7 +4,7 @@ import Layout from './layout.jsx';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import logo from './logo1.svg';
 
-const client = new W3CWebSocket('ws://localhost:5000');
+const client = new W3CWebSocket('ws://app.netlify.com/sites/thunderous-bavarois-da9e5c/');
 class Creation extends React.Component
 {
 	constructor(props)
