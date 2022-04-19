@@ -30,7 +30,7 @@ class Creation extends React.Component
 	componentDidMount()
 	{
 		//const url = "http://127.0.0.1:5000";
-	    const url = "http://nuclei-message.herokuapp.com";
+	    const url = "https://nuclei-message.herokuapp.com";
 		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
 		client.on('connection', (m) => {
 				console.log(m);
