@@ -45,7 +45,7 @@ class List extends React.Component
 		let i = 0;	
 		return ( 
 				<div>
-				<div className = "list"d = "mgL">
+				<div className = "list" id = "mgL">
 					<Setup />{this.state.list.map((e) => <Message info = {e} key = {i++} />)}
 				</div>
 				<Send client = {this.props.client} username = {this.props.username} />
