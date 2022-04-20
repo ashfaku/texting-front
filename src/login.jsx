@@ -2,6 +2,9 @@ import React from 'react';
 import './login.css';
 import logo from './logo1.svg';
 import Creation from './creation.jsx';
+import socketClient  from "socket.io-client";
+
+var client;
 class Login extends React.Component
 {
 	login()
@@ -15,9 +18,16 @@ class Login extends React.Component
 		};
 		return info;
 	}
+	componentDidMount()
+	{
+		const url = "http://127.0.0.1:5000";
+	    //const url = "https://nuclei-message.herokuapp.com";
+		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
+	}
 	handleSubmit = (event) => 
 	{
-		this.props.value.render(<Creation root = {this.props.value} />);
+		client.emit('creating', client.id);
+		this.props.value.render(<Creation client = {client} root = {this.props.value} />);
 	}
 	render()
 	{

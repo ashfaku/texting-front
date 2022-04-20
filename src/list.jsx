@@ -16,7 +16,7 @@ class List extends React.Component
 	componentDidMount = async () =>
 	{
 		let client = this.props.client;
-		client.emit('initialList', {"request" : true });
+		client.emit('initialList', {"clientID" : client.id });
 		console.log(this.props.username);
 		client.on('initialData', (message) => {
 			this.setState({list: message});

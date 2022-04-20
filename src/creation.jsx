@@ -1,7 +1,6 @@
 import React from 'react';
 import './login.css';
 import Layout from './layout.jsx';
-import socketClient  from "socket.io-client";
 import logo from './logo1.svg';
 var client;
 class Creation extends React.Component
@@ -13,6 +12,7 @@ class Creation extends React.Component
 		{
 			"accountStatus" : false
 		};
+		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 	getInfo()
 	{		
@@ -27,35 +27,24 @@ class Creation extends React.Component
 		};
 		return info;
 	}
-	componentDidMount()
+	componentDidMount = () =>
 	{
-		//const url = "http://127.0.0.1:5000";
-	    const url = "https://nuclei-message.herokuapp.com";
-		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
+		client = this.props.client;
 		client.on('connection', (m) => {
 				console.log(m);
 		});
 		client.on('createAccount', (message) => {
-			console.log(message);
-		
+			console.log(message);		
 		});
 		client.on('status', (message) => {
 			console.log(message);
 			this.setState({ "accountStatus" : (message.status === "Not allowed")});
-			if (this.state.accountStatus)
+			if (message.status === "Allowed")
 			{
+				/// iiii
 				this.props.root.render(<Layout user = {message.account} client = {client} />);
 			}
 		});
-		/*client.onmessage = (message) => {
-			var v = JSON.parse(message.data);
-			this.setState({ "accountStatus" : (v.status === "Not allowed")});
-			if (this.state.accountStatus)
-			{
-				client.close();
-				this.props.root.render(<Layout user = {v.account} />);
-			}
-		};*/
 	}
 	callBackendAPI = async () => 
 	{
@@ -74,8 +63,8 @@ class Creation extends React.Component
 			"username" : info.username,
 			"password" : info.password,
 			"email" : info.email,
-			type: "create"
-		} );
+			"clientID": client.id
+		});
 		/*client.send(JSON.stringify({
 			"username" : info.username,
 			"password" : info.password,
