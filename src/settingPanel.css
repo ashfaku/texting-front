@@ -6,3 +6,11 @@
 	height: 100%;
 	background-color: black;
 }
+#requestPanel
+{
+	position: absolute;
+	right: 0em;
+	width: 30em;
+	height: 20%;
+	background-color: blue;
+}
