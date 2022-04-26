@@ -9,7 +9,7 @@ class Layout extends React.Component
 	{
 		return (<div> 
 			<FriendList client = {this.props.client} list = {this.props.user.friendList} />
-			<List client = {this.props.client} username = {this.props.user.username} />
+			<List client = {this.props.client} user = {this.props.user} />
 			<Panel client = {this.props.client} username = {this.props.user.username} />
 		</div>);
 	}

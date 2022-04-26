@@ -13,18 +13,22 @@ class Send extends React.Component
 	}
 	send = () =>
 	{
+		var user = this.props.user;
 		console.log(document.getElementById("sendMsg").value);
-		const docData = 
+		if (user.friendList.length > 0)
 		{
-			type: "sendData",
-			message: document.getElementById("sendMsg").value,
-			date: new Date(),
-			name: this.props.username,
-			color: "red"
+			const docData = 
+			{
+				message: document.getElementById("sendMsg").value,
+				date: new Date(),
+				name: user.username,
+				other: user.friendList[0],
+				color: "red"
+			}
+			if (docData.message.length > 0)
+				this.props.client.emit('sendData', docData);
+			document.getElementById("sendMsg").value = "";
 		}
-		if (docData.message.length > 0)
-			this.props.client.emit('sendData', docData);
-		document.getElementById("sendMsg").value = "";
 	}
 	render()
 	{

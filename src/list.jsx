@@ -11,14 +11,21 @@ class List extends React.Component
 		super(props);
 		this.state = {list : []};
 		this.componentDidMount = this.componentDidMount.bind(this);
-
 	}
 	componentDidMount = async () =>
 	{
 		let client = this.props.client;
-		client.emit('initialList', {"clientID" : client.id });
-		console.log(this.props.username);
+		if (this.props.user.friendList.length > 0)
+		{
+			client.emit('initialList', {
+				clientID : client.id,
+				own: this.props.user.username,
+				username: this.props.user.friendList[0]
+			});
+		}
+		//console.log(this.props.username);
 		client.on('initialData', (message) => {
+			console.log(message);
 			this.setState({list: message});
 		});
 		client.on('update', (message) => {
@@ -48,7 +55,7 @@ class List extends React.Component
 				<div className = "list" id = "mgL">
 					<Setup />{this.state.list.map((e) => <Message info = {e} key = {i++} />)}
 				</div>
-				<Send client = {this.props.client} username = {this.props.username} />
+				<Send client = {this.props.client} user = {this.props.user} />
 		
 			</div>)
 	}
