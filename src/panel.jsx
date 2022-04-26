@@ -42,7 +42,7 @@ class Panel extends React.Component
 			<i className = "fa fa-sign-out" onClick = {this.signOut}></i>
 			<i className = "fa fa-sign-out" onClick = {this.friendRequest}></i>
 			{this.state.settingsVisible ? <SettingPanel /> : <span></span>}
-			{this.state.friendRequest ? <RequestPanel client = {this.props.client} /> : <span></span>}
+			{this.state.friendRequest ? <RequestPanel username = {this.props.username} client = {this.props.client} /> : <span></span>}
 		
 		</div>
 	}

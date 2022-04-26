@@ -5,16 +5,25 @@ class RequestPanel extends React.Component
 	constructor(props)
 	{
 		super(props);
+		this.state = {
+			"request" : ""
+		};
 		this.tryReq = this.tryReq.bind(this);
 	}
 	tryReq()
 	{
+		console.log(this.props.username);
 		var username = document.getElementById("sendRequest").value;
 		this.props.client.on('requestFound', (m) => {
-			console.log(m);
+			this.setState({"request": m});
+			if (m == "Found")
+			{
+				
+			}
 		});
 		this.props.client.emit('friendRequest', {
-			"username" : username,
+			username : username,
+			own: this.props.username,
 			clientID: this.props.client.id
 		});
 	}
@@ -23,6 +32,7 @@ class RequestPanel extends React.Component
 		return (<div id = "requestPanel">
 				<input type = "text" id = "sendRequest"></input>
 				<button id = "sendReq" onClick = {this.tryReq}>Send Request</button>
+				<div id = "statusResp">{this.state.request}</div>
 		</div>)
 	}
 }
