@@ -16,7 +16,7 @@ class RequestPanel extends React.Component
 		var username = document.getElementById("sendRequest").value;
 		this.props.client.on('requestFound', (m) => {
 			this.setState({"request": m});
-			if (m == "Found")
+			if (m === "Found")
 			{
 				
 			}
