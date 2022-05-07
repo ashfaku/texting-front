@@ -3,7 +3,8 @@ import Message from './message.jsx';
 import Setup from './setup.jsx';
 import './index.css';
 import Send from './send.jsx';
-
+import socketClient  from "socket.io-client";
+var client;
 class List extends React.Component 
 {
 	constructor(props) 
@@ -14,19 +15,10 @@ class List extends React.Component
 	}
 	componentDidMount = async () =>
 	{
-		let client = this.props.client;
-		if (this.props.user.friendList.length > 0)
-		{
-			client.emit('initialList', {
-				clientID : client.id,
-				own: this.props.user.username,
-				username: this.props.user.friendList[0]
-			});
-		}
-		//console.log(this.props.username);
-		client.on('initialData', (message) => {
+		client = this.props.client;
+		client.on('textDocs', (message) => {
 			console.log(message);
-			this.setState({list: message});
+	//		this.setState({list: message});
 		});
 		client.on('update', (message) => {
 			console.log(message);

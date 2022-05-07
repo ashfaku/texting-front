@@ -29,7 +29,7 @@ class Login extends React.Component
 	}
 	componentDidMount()
 	{
-		const url = "http://127.0.0.1:5000";
+		const url = "http://127.0.0.1:5000/logRoom";
         //const url = "https://nuclei-message.herokuapp.com";
 		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
 		client.on('login', (m) =>
@@ -48,6 +48,7 @@ class Login extends React.Component
 	handleSubmit = (event) => 
 	{
 		client.emit('creating', client.id);
+		client.close();
 		this.props.value.render(<Creation client = {client} root = {this.props.value} />);
 	}
 	render()

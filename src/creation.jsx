@@ -2,6 +2,7 @@ import React from 'react';
 import './login.css';
 import Layout from './layout.jsx';
 import logo from './logo1.svg';
+import socketClient  from "socket.io-client";
 var client;
 class Creation extends React.Component
 {
@@ -29,19 +30,15 @@ class Creation extends React.Component
 	}
 	componentDidMount = () =>
 	{
-		client = this.props.client;
-		client.on('connection', (m) => {
-				console.log(m);
-		});
-		client.on('createAccount', (message) => {
-			console.log(message);		
-		});
+		const url = "http://127.0.0.1:5000/creationRoom";
+		//const url = "https://nuclei-message.herokuapp.com";
+		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
 		client.on('status', (message) => {
 			console.log(message);
 			this.setState({ "accountStatus" : (message.status === "Not allowed")});
 			if (message.status === "Allowed")
 			{
-				/// iiii
+				client.close();
 				this.props.root.render(<Layout user = {message.account} client = {client} />);
 			}
 		});
@@ -58,6 +55,7 @@ class Creation extends React.Component
 	};
 	handleSubmit = async (event) =>
 	{
+		console.log(client.id);
 		let info = this.getInfo();
 		client.emit('createAccount', {
 			"username" : info.username,
