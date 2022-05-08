@@ -17,7 +17,6 @@ class Layout extends React.Component
 	}
 	componentDidMount = () =>	
 	{
-		console.log("Here?");
 		const url = "http://127.0.0.1:5000/chatting";
 		//const url = "https://nuclei-message.herokuapp.com";
 		client = socketClient(url, {transports: ['websocket', 'polling', 'flashsocket']});
